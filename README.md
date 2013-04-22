@@ -24,20 +24,20 @@ app.controller('bodyController',function($scope, dpd){
 
 Cache
 ---------------------
-This comes with a cache object that will persist after calling a get().
+>This comes with a cache object that will persist after calling a get().
 
-dpd.categories.cache.all will return every category that is currently in the cache
-dpd.categories.get(id) will fetch a single category from the database and if it's in the cache, updated it. If it's not in the cache it will be added.
-dpd.categories.post will add a new category to the the database and on success will add it to the cache
-dpd.categories.put will update a category in the the database and on success will update it in the cache
-dpd.categories.del will delete a category from the the database and on success will delete it from the cache
+>dpd.categories.cache.all will return every category that is currently in the cache
+>dpd.categories.get(id) will fetch a single category from the database and if it's in the cache, updated it. If it's not in the cache it will be added.
+>dpd.categories.post will add a new category to the the database and on success will add it to the cache
+>dpd.categories.put will update a category in the the database and on success will update it in the cache
+>dpd.categories.del will delete a category from the the database and on success will delete it from the cache
 
 
-Here is an example where you can query objects from the table and immediately put them on the screen.
-<body ng-controller="bodyController">
+>Here is an example where you can query objects from the table and immediately put them on the screen.
+>'<body ng-controller="bodyController">
 <ul>
 	<li ng-repeat="c in dpd.categories.cache.all" ng-init="dpd.categories.get()">
 		{{c.value}}
 	</li>
 </ul>
-</body>
+</body>'
