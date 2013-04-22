@@ -53,7 +53,7 @@ dpd.categories.del will delete a category from the the database and on success w
 
 Here is an example where you can query objects from the table and immediately put them on the screen.
 
-	<body ng-controller="bodyController">'
+	<body ng-controller="bodyController">
 		<ul>
 			<li ng-repeat="c in dpd.categories.cache.all" ng-init="dpd.categories.get()">
 				{{c.value}}
