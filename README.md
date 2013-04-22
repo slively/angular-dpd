@@ -5,6 +5,7 @@ A plugin for Angular that allows for easy interaction with deployd.
 Usage is the same as the default dpd.js file, but requires configuration of the necessary collections.
 Extra 'save' helper function added that will POST if the object has no 'id' and will put if it does.
 Also includes a cache for your objects that have been retrieved for easy insertion into the DOM.
+This allows you to quickly wire up your angular app with deployd and keep all of your files static so the deployd api can spend it's time serving data instead of a dynamic .js file.
 
 Example usage
 ---------------------
