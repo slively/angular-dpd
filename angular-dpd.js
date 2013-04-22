@@ -36,10 +36,15 @@ angular.module('dpd',[]).value('dpdConfig',[]).factory('dpd',function($http, $ro
 		dpd[d].get = function(o, s, e){
 			if (typeof o == "string"){
 				$http.get('/'+d+'/'+o).success(function(data, status, headers, config){
-					var t = dpd[d].cache.get(o);
-					if (typeof t != 'undefined'){
-						t = data;
+					var add = true;
+					for (var i in dpd[d].cache.all){
+						if (dpd[d].cache.all[i].id == id){
+							add = false;
+							dpd[d].cache.all[i] = data;
+						}
 					}
+					if (add)
+						dpd[d].cache.all.push(data);
 				}).success(checkUndefinedFunc(s)).error(ef).error(checkUndefinedFunc(e));
 			} else{
 				if (typeof o == "function"){
@@ -58,11 +63,15 @@ angular.module('dpd',[]).value('dpdConfig',[]).factory('dpd',function($http, $ro
 		
 		dpd[d].put = function(id, o, s, e){
 			$http.put('/'+d+'/'+id,o).success(function(data, status, headers, config){
+				var add = true;
 				for (var i in dpd[d].cache.all){
 					if (dpd[d].cache.all[i].id == id){
+						add = false;
 						dpd[d].cache.all[i] = data;
 					}
 				}
+				if (add)
+					dpd[d].cache.all.push(data);
 			}).success(checkUndefinedFunc(s)).error(ef).error(checkUndefinedFunc(e));
 		};
 		
