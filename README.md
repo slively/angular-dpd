@@ -40,6 +40,8 @@ This comes with a cache object that will persist after calling a get().
 
 dpd.categories.cache.all will return every category that is currently in the cache
 
+dpd.categories.cache.get('414b9c5cc315485d') will return a specific category from the cache
+
 dpd.categories.get(id) will fetch a single category from the database and if it's in the cache, updated it. 
 If it's not in the cache it will be added.
 
