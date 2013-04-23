@@ -18,6 +18,8 @@ Example usage
 
 		dpd.categories.get();
 		
+		dpd.categories.get('414b9c5cc315485d');
+		
 		dpd.categories.post({"value":"cat1","typeId":"987ad2e6d2bdaa9d"});
 		
 		dpd.categories.put('414b9c5cc315485d',{"value":"cat123"});
@@ -38,20 +40,26 @@ Cache
 ---------------------
 
 This comes with a cache object that will persist after calling a get().
+	
+	// will return every category that is currently in the cache
+	dpd.categories.cache.all 
 
-dpd.categories.cache.all will return every category that is currently in the cache
+	// will return a specific category from the cache
+	dpd.categories.cache.get('414b9c5cc315485d') 
 
-dpd.categories.cache.get('414b9c5cc315485d') will return a specific category from the cache
+	// will fetch a single category from the database and if it's in the cache, update the cached item.
+	// If it's not in the cache it will be added.
+	dpd.categories.get(id,function(result){ ... });
+	
+	// will add a new category to the the database and on success will add it to the cache
+	dpd.categories.post({..},function(result){ ... });
 
-dpd.categories.get(id) will fetch a single category from the database and if it's in the cache, updated it. 
-If it's not in the cache it will be added.
+	// will update a category in the the database and on success will update it in the cache 
+	// If it's not in the cache it will be added.
+	dpd.categories.put(id, {..},function(result){ ... });
 
-dpd.categories.post will add a new category to the the database and on success will add it to the cache
-
-dpd.categories.put will update a category in the the database and on success will update it in the cache
-If it's not in the cache it will be added.
-
-dpd.categories.del will delete a category from the the database and on success will delete it from the cache
+	// will delete a category from the the database and on success will delete it from the cache
+	dpd.categories.del(id,function(){ ... });
 
 
 Here is an example where you can query objects from the table and immediately put them on the screen.
