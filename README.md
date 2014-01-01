@@ -19,6 +19,7 @@ Example usage
 		dpd.categories.get();
 		
         dpd.categories.get('414b9c5cc315485d');
+        
         dpd.categories.get($sort: {name: 1}, $limit: 10, rightsLevel: {$gt:0}}, function (data, status, headers, config) {
             $scope.categories = data;
         });
