@@ -20,9 +20,8 @@ Example usage
 		
         dpd.categories.get('414b9c5cc315485d');
         
-        dpd.categories.get($sort: {name: 1}, $limit: 10, rightsLevel: {$gt:0}}, function (data, status, headers, config) {
-            $scope.categories = data;
-        });
+        // Example with an [advanced query](http://docs.deployd.com/docs/collections/reference/querying-collections.md#s-Advanced%20Queries-2035):
+        dpd.categories.get($sort: {name: 1}, $limit: 10, rightsLevel: {$gt:0}};
 		
 		dpd.categories.post({"value":"cat1","typeId":"987ad2e6d2bdaa9d"});
 		
