@@ -20,6 +20,19 @@ angular.module('dpd',[]).value('dpdConfig',[]).factory('dpd',function($http, $ro
 		
 		return f;
 	}
+
+    var isComplexQuery = function(obj) {
+        if (obj) {
+            for (var k in obj) {
+                if (obj.hasOwnProperty(k)) {
+                    if (typeof obj[k] === 'object') {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 	
 	dpdConfig.forEach(function(d){
 		dpd[d] = {};
@@ -54,10 +67,17 @@ angular.module('dpd',[]).value('dpdConfig',[]).factory('dpd',function($http, $ro
 						dpd[d].cache.all = data;
 					}).success(checkUndefinedFunc(s)).error(ef).error(checkUndefinedFunc(e));
 				} else {
-					$http.get('/'+d,{params:o}).success(function(data, status, headers, config){
-						dpd[d].cache.all = data;
-					}).success(checkUndefinedFunc(s)).error(ef).error(checkUndefinedFunc(e));
-				}
+                    if (isComplexQuery(o)) {
+                        var query = encodeURI(JSON.stringify(o));
+                        $http.get('/'+d+'?'+query).success(function(data, status, headers, config){
+                            dpd[d].cache.all = data;
+                        }).success(checkUndefinedFunc(s)).error(ef).error(checkUndefinedFunc(e));
+                    } else {
+                        $http.get('/'+d,{params:o}).success(function(data, status, headers, config){
+                            dpd[d].cache.all = data;
+                        }).success(checkUndefinedFunc(s)).error(ef).error(checkUndefinedFunc(e));
+                    }
+                }
 			}
 		};
 		
