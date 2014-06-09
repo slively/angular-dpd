@@ -105,7 +105,7 @@ angular.module('dpd',[]).value('dpdConfig',[]).factory('dpd',function($http, $ro
 			$http.delete('/'+d+'/'+id).success(function(data, status, headers, config){
 				for (var i in dpd[d].cache.all){
 					if (dpd[d].cache.all[i].id == id){
-						dpd[d].cache.all.slice(i,1);
+						dpd[d].cache.all.splice(i,1);
 					}
 				}
 			}).success(checkUndefinedFunc(s)).error(ef).error(checkUndefinedFunc(e));
