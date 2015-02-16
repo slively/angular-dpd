@@ -3,9 +3,9 @@
 var angularDpdSockets = [];
 
 angular.module('dpd', []).value('dpdConfig', [])
-    .factory('dpdSocket', function($rootScope, dpdConfig) {
+    .factory('dpdSocket', ['$rootScope', 'dpdConfig', function($rootScope, dpdConfig) {
         if (!dpdConfig.useSocketIo) {
-            return false;
+            return undefined;
         }
         if (!io.connect) {
             throw ('angular-dpd: socket.io library not available, includ the client library or set dpdConfig.useSocketIo = false');
@@ -38,8 +38,8 @@ angular.module('dpd', []).value('dpdConfig', [])
             },
             rawSocket: socket
         };
-    })
-    .factory('dpd', function($http, $rootScope, dpdConfig, dpdSocket) {
+    }])
+    .factory('dpd', ['$http', '$rootScope', 'dpdConfig', 'dpdSocket', function($http, $rootScope, dpdConfig, dpdSocket) {
         var dpd = {};
         dpd.errors = [];
         dpd.socket = dpdSocket;
@@ -202,4 +202,4 @@ angular.module('dpd', []).value('dpdConfig', [])
         
         $rootScope.dpd = dpd;
         return dpd;
-    });
+    }]);
