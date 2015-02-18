@@ -1,4 +1,4 @@
-dpd-angular-cache
+angular-dpd
 =================
 
 A plugin for Angular that allows for easy interaction with deployd.
@@ -86,6 +86,9 @@ dpd.categories.put(id, {..},function(result){ ... });
 
 // will delete a category from the the database and on success will delete it from the cache
 dpd.categories.del(id,function(){ ... });
+
+// login a user
+dpd.users.exec('login', { username: 'user', password: 'pass' }).success(function(session) { }).error(function(err) { });
 ```
 
 Here is an example where you can query objects from the table and immediately put them on the screen.
