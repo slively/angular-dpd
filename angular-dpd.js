@@ -5,7 +5,7 @@ var angularDpdSockets = [];
 angular.module('dpd', []).value('dpdConfig', [])
     .factory('dpdSocket', ['$rootScope', 'dpdConfig', function($rootScope, dpdConfig) {
         if (!dpdConfig.useSocketIo) {
-            return undefined;
+            return {};
         }
         if (!io.connect) {
             throw ('angular-dpd: socket.io library not available, includ the client library or set dpdConfig.useSocketIo = false');
