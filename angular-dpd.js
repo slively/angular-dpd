@@ -10,7 +10,8 @@ angular.module('dpd', []).value('dpdConfig', [])
         if (!io.connect) {
             throw ('angular-dpd: socket.io library not available, includ the client library or set dpdConfig.useSocketIo = false');
         }
-        var socket = angularDpdSockets[dpdConfig.serverRoot] = angularDpdSockets[dpdConfig.serverRoot] || io.connect(dpdConfig.serverRoot, dpdConfig.socketOpts);
+        var serverRoot = dpdConfig.serverRoot || '';
+        var socket = angularDpdSockets[serverRoot] = angularDpdSockets[serverRoot] || io.connect(serverRoot, dpdConfig.socketOpts);
         var listeners = {};
         return {
             on: function(eventName, callback) {
@@ -49,7 +50,7 @@ angular.module('dpd', []).value('dpdConfig', [])
             };
         }
 
-        var serverRoot = dpdConfig.serverRoot.replace(/\/$/, "") || "";
+        var serverRoot = (dpdConfig.serverRoot) ? dpdConfig.serverRoot.replace(/\/$/, "") : "";
 
         if (!Array.prototype.forEach) {
             Array.prototype.forEach = function(fn, scope) {
