@@ -20,7 +20,7 @@ app.value('dpdConfig', {
 	collections: ['categories'], 
 	serverRoot: 'http://someotherserver.com/', // optional, defaults to same server
 	socketOptions: { reconnectionDelayMax: 3000 }, // optional socket io additional configuration
-	useSocketIo: true // optional, defaults to false
+	useSocketIo: true, // optional, defaults to false
 	noCache: true // optional, defaults to false (false means that caching is enabled, true means it disabled)
 });
 
@@ -132,3 +132,30 @@ For low-level access, the raw socket is exposed as `dpd.socket.rawSocket`.
 
 Note: We inject $scope in the call so that the library can automatically remove the events if the $scope is $destroyed (such as when a route change occurs).
 	
+dpd.users
+---------------------
+The dpd.users collection traditionally allows access to several functions including
+dpd.users.me(), dpd.users.login, dpd.users.logout.  These are currently not well supported, but may be used as follows:
+
+##dpd.users.me()
+use ```dpd.users.get('me')``` - this seems to work as long as your sid cookie is set
+
+##dpd.users.login
+use:
+```function login(user){
+    $http.post( dpdConfig.serverRoot + 'users/login', { username: user.username, password: user.password})
+      .then(
+      function(session, error) {
+        if (error) {
+          alert(error.message);
+          return false;
+        } else {
+          $state.go('loginSuccess');
+        }
+      });
+  }```
+
+Unfortuately, it won't set your sid cookie
+
+## dpd.users.logout()
+Use dpd.users.get('logout')
